@@ -180,6 +180,9 @@ int i2c_simple_write_transmit_len(i2c_addr_t addr, uint8_t len) {
 */
 int i2c_simple_read_data_generic(i2c_addr_t addr, ECTF_I2C_REGS reg, uint8_t len, uint8_t* buf)
 {
+    if (buf == NULL) {
+        return -1;
+    }
     mxc_i2c_req_t request;
     request.i2c = I2C_INTERFACE;
     request.addr = addr;
@@ -207,11 +210,14 @@ int i2c_simple_read_data_generic(i2c_addr_t addr, ECTF_I2C_REGS reg, uint8_t len
  * Can be used to write the PARAMS or RESULT register
 */
 int i2c_simple_write_data_generic(i2c_addr_t addr, ECTF_I2C_REGS reg, uint8_t len, uint8_t* buf) {
-    uint8_t packet[257];
-    packet[0] = reg;
+    if ( buf == NULL) {
+        return -1;
+    }
     if (len > 256) {
         return -1;
     }   
+    uint8_t packet[257];
+    packet[0] = reg;
     memcpy(&packet[1], buf, len);
     
     mxc_i2c_req_t request;
