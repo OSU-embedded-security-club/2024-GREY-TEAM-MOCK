@@ -187,6 +187,15 @@ ifeq ($(CRYPTO_EXAMPLE), 1)
 IPATH += wolfssl
 endif
 
+# Add TinyCrypt source and header paths
+VPATH += /tinycrypt/lib/source
+IPATH += /tinycrypt/include
+
+# Add TinyCrypt source files
+SRCS += /tinycrypt/lib/source/aes_encrypt.c
+SRCS += /tinycrypt/lib/source/aes_decrypt.c
+SRCS += /tinycrypt/lib/source/sha256.c
+
 IPATH := $(IPATH)
 
 AUTOSEARCH ?= 1
@@ -265,7 +274,6 @@ PROJ_CFLAGS += -DWOLFSSL_USER_IO
 PROJ_CFLAGS += -DNO_WRITEV -DTIME_T_NOT_64BIT                                                    
 endif
 PROJ_CFLAGS += -DMXC_ASSERT_ENABLE
-
 ifeq ($(POST_BOOT_ENABLED), 1)
 	PROJ_CFLAGS += -DPOST_BOOT=$(POST_BOOT_CODE)
 endif

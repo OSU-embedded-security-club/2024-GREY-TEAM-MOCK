@@ -187,6 +187,15 @@ IPATH += wolfssl
 endif
 IPATH := $(IPATH)
 
+# Add TinyCrypt source and header paths
+VPATH += /tinycrypt/lib/source
+IPATH += /tinycrypt/include
+
+# Add TinyCrypt source files
+SRCS += /tinycrypt/lib/source/aes_encrypt.c
+SRCS += /tinycrypt/lib/source/aes_decrypt.c
+SRCS += /tinycrypt/lib/source/sha256.c
+
 AUTOSEARCH ?= 1
 ifeq ($(AUTOSEARCH), 1)
 # Auto-detect all C source files on VPATH

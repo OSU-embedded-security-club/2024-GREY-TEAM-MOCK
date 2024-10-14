@@ -1,5 +1,5 @@
-# eCTF Insecure Example
-This repository holds the insecure example design for an eCTF MISC system.
+# Mock eCTF AU 24
+This repository holds the OSU mock eCTF design for AU 24
 
 
 ## Layout

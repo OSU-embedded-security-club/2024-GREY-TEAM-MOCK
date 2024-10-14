@@ -29,6 +29,8 @@ pkgs.mkShell {
     pkgs.minicom
   ];
 
+  tinycrypt = ./tinycrypt;
+
   msdk = builtins.fetchGit {
     url = "https://github.com/Analog-Devices-MSDK/msdk.git";
     ref = "refs/tags/v2023_06";
