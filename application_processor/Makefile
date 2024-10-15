@@ -187,7 +187,7 @@ IPATH += wolfssl
 endif
 IPATH := $(IPATH)
 
-# # Add TinyCrypt source and header paths
+# Add TinyCrypt source and header paths
 VPATH += ../tinycrypt/lib/source
 IPATH += ../tinycrypt/lib/include
 
