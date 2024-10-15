@@ -4,17 +4,16 @@
 #include "../tinycrypt/lib/include/tinycrypt/ctr_prng.h"
 #include <string.h>
 
-#define KEY_LENGTH 16 // AES-128 key length in bytes
+#define KEY_LENGTH 16 
 
 int main(void) {
     TCCtrPrng_t ctx;
     uint8_t entropy[TC_AES_KEY_SIZE + TC_AES_BLOCK_SIZE]; // For entropy
     uint8_t key[KEY_LENGTH];
     int result;
-
-    // Initialize the entropy (this should be securely generated in a real application)
+    
     for (int i = 0; i < sizeof(entropy); i++) {
-        entropy[i] = (uint8_t)(i + 1); // Placeholder for actual entropy
+        entropy[i] = (uint8_t)(i + 1);
     }
 
     // Initialize the PRNG
