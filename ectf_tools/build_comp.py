@@ -94,7 +94,7 @@ def build_component(
         logger.error("Error: tool did not build properly")
         exit(1)
 
-    logger.info("Built application processor")
+    logger.info("Built component")
 
     logger.info("Packaging binary")
     package_binary(output_bin, output_img)
@@ -105,8 +105,8 @@ def build_component(
 
 def main():
     parser = argparse.ArgumentParser(
-        prog="eCTF Build Application Processor Tool",
-        description="Build an Application Processor using Nix"
+        prog="eCTF Build Component Tool",
+        description="Build an Component using Nix"
     )
 
     parser.add_argument(
@@ -116,7 +116,7 @@ def main():
 
     parser.add_argument(
         "-on", "--output-name", required=True,
-        help=("Output prefix of the built application processor binary \n"
+        help=("Output prefix of the built component binary \n"
               "Example 'ap' -> ap.bin, ap.elf, ap.img" 
         )
     )

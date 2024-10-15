@@ -188,13 +188,13 @@ IPATH += wolfssl
 endif
 
 # Add TinyCrypt source and header paths
-VPATH += /tinycrypt/lib/source
-IPATH += /tinycrypt/include
+VPATH += ../tinycrypt/lib/source
+IPATH += ../tinycrypt/lib/include
 
 # Add TinyCrypt source files
-SRCS += /tinycrypt/lib/source/aes_encrypt.c
-SRCS += /tinycrypt/lib/source/aes_decrypt.c
-SRCS += /tinycrypt/lib/source/sha256.c
+SRCS += ../tinycrypt/lib/source/aes_encrypt.c
+SRCS += ../tinycrypt/lib/source/aes_decrypt.c
+SRCS += ../tinycrypt/lib/source/sha256.c
 
 IPATH := $(IPATH)
 

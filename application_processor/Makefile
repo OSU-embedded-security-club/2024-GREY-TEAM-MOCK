@@ -187,14 +187,14 @@ IPATH += wolfssl
 endif
 IPATH := $(IPATH)
 
-# Add TinyCrypt source and header paths
-VPATH += /tinycrypt/lib/source
-IPATH += /tinycrypt/include
+# # Add TinyCrypt source and header paths
+VPATH += ../tinycrypt/lib/source
+IPATH += ../tinycrypt/lib/include
 
 # Add TinyCrypt source files
-SRCS += /tinycrypt/lib/source/aes_encrypt.c
-SRCS += /tinycrypt/lib/source/aes_decrypt.c
-SRCS += /tinycrypt/lib/source/sha256.c
+SRCS += ../tinycrypt/lib/source/aes_encrypt.c
+SRCS += ../tinycrypt/lib/source/aes_decrypt.c
+SRCS += ../tinycrypt/lib/source/sha256.c
 
 AUTOSEARCH ?= 1
 ifeq ($(AUTOSEARCH), 1)
@@ -427,7 +427,6 @@ endif
 ifeq "$(MAKECMDGOALS)" ""
 MAKECMDGOALS:=$(.DEFAULT_GOAL)
 endif
-
 
 all:
 # 	Extend the functionality of the "all" recipe here
