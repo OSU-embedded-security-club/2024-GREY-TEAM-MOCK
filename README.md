@@ -92,7 +92,7 @@ options:
 
 **Example Utilization**
 ```bash
-ectf_build_depl -d ../ectf-2024-example
+ectf_build_depl -d ../2024-GREY-TEAM-MOCK
 ```
 ### Building the Application Processor
 This will run the `Makefile` found in the application processor folder using the following inputs:
@@ -125,7 +125,7 @@ options:
 
 **Example Utilization**
 ```bash
-ectf_build_ap -d ../ectf-2024-example -on ap --p 123456 -c 2 -ids "0x11111124, 0x11111125" -b "Test boot message" -t 0123456789abcdef -od build
+ectf_build_ap -d ../2024-GREY-TEAM-MOCK -on ap --p 123456 -c 2 -ids "0x11111124, 0x11111125" -b "Test boot message" -t 0123456789abcdef -od build
 ```
 
 ### Building the Component
@@ -158,7 +158,7 @@ options:
 
 **Example Utilization**
 ```bash
-ectf_build_comp -d ../ectf-2024-example -on comp -od build -id 0x11111125 -b "Component boot" -al "McLean" -ad "08/08/08" -ac "Fritz"
+ectf_build_comp -d ../2024-GREY-TEAM-MOCK -on comp -od build -id 0x11111125 -b "Component boot" -al "McLean" -ad "08/08/08" -ac "Fritz"
 ```
 
 ## Flashing
@@ -177,7 +177,7 @@ optional arguments:
 
 **Example Utilization**
 ```bash
-ectf_update --infile example_fw/build/firmware.img --port /dev/ttyUSB0
+ectf_update --infile ./build/firmware.img --port /dev/ttyUSB0
 ```
 
 ## Host Tools
