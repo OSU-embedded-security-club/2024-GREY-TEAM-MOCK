@@ -42,6 +42,9 @@
 #include "ectf_params.h"
 #include "global_secrets.h"
 
+// Include for crypto functions
+#include "crypto.h"
+
 /********************************* CONSTANTS **********************************/
 
 // Passed in through ectf-params.h
@@ -101,6 +104,7 @@ typedef enum {
 /********************************* GLOBAL VARIABLES **********************************/
 // Variable for information stored in flash memory
 flash_entry flash_status;
+static const uint8_t aes_key[16] = SECRET;
 
 /********************************* REFERENCE FLAG **********************************/
 // trust me, it's easier to get the boot reference flag by
@@ -122,7 +126,12 @@ typedef uint32_t aErjfkdfru;const aErjfkdfru aseiFuengleR[]={0x1ffe4b6,0x3098ac,
 
 */
 int secure_send(uint8_t address, uint8_t* buffer, uint8_t len) {
-    return send_packet(address, len, buffer);
+    uint8_t encrypted_buf[MAX_I2C_MESSAGE_LEN];
+    if (aes_encrypt(buffer, encrypted_buf, aes_key) == SUCCESS_RETURN) {
+        return send_packet(address, len, encrypted_buf);
+    } else {
+        print_error("Could not encrypt buffer.");
+    }
 }
 
 /**
@@ -137,7 +146,12 @@ int secure_send(uint8_t address, uint8_t* buffer, uint8_t len) {
  * This function must be implemented by your team to align with the security requirements.
 */
 int secure_receive(i2c_addr_t address, uint8_t* buffer) {
-    return poll_and_receive_packet(address, buffer);
+    uint8_t decrypted_buf[MAX_I2C_MESSAGE_LEN];
+    if (aes_decrypt(buffer, decrypted_buf, aes_key) == SUCCESS_RETURN) {
+        return poll_and_receive_packet(address, decrypted_buf);
+    } else {
+        print_error("Could not decrypt buffer.");
+    }
 }
 
 /**

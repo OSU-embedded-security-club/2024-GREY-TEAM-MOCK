@@ -28,6 +28,9 @@
 #include "ectf_params.h"
 #include "global_secrets.h"
 
+// Include for crypto functions
+#include "crypto.h"
+
 #ifdef POST_BOOT
 #include "led.h"
 #include <stdint.h>
@@ -84,6 +87,7 @@ void process_attest(void);
 // Global varaibles
 uint8_t receive_buffer[MAX_I2C_MESSAGE_LEN];
 uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
+static const uint8_t aes_key[16] = SECRET;
 
 /******************************* POST BOOT FUNCTIONALITY *********************************/
 /**
@@ -96,7 +100,12 @@ uint8_t transmit_buffer[MAX_I2C_MESSAGE_LEN];
  * This function must be implemented by your team to align with the security requirements.
 */
 void secure_send(uint8_t* buffer, uint8_t len) {
-    send_packet_and_ack(len, buffer); 
+    uint8_t encrypted_buf[MAX_I2C_MESSAGE_LEN];
+    if (aes_encrypt(buffer, encrypted_buf, aes_key) == SUCCESS_RETURN) {
+        send_packet_and_ack(len, encrypted_buf);
+    }  else {
+        print_error("Could not encrypt buffer.");
+    }
 }
 
 /**
@@ -110,7 +119,12 @@ void secure_send(uint8_t* buffer, uint8_t len) {
  * This function must be implemented by your team to align with the security requirements.
 */
 int secure_receive(uint8_t* buffer) {
-    return wait_and_receive_packet(buffer);
+    uint8_t decrypted_buf[MAX_I2C_MESSAGE_LEN];
+    if (aes_decrypt(buffer, decrypted_buf, aes_key) == SUCCESS_RETURN) {
+        return wait_and_receive_packet(decrypted_buf);
+    } else {
+        print_error("Could not decrypt buffer.");
+    }
 }
 
 /******************************* FUNCTION DEFINITIONS *********************************/
