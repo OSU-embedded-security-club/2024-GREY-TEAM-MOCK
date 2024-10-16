@@ -131,6 +131,7 @@ int secure_send(uint8_t address, uint8_t* buffer, uint8_t len) {
         return send_packet(address, len, encrypted_buf);
     } else {
         print_error("Could not encrypt buffer.");
+        return -1;
     }
 }
 
@@ -151,6 +152,7 @@ int secure_receive(i2c_addr_t address, uint8_t* buffer) {
         return poll_and_receive_packet(address, decrypted_buf);
     } else {
         print_error("Could not decrypt buffer.");
+        return -1;
     }
 }
 
