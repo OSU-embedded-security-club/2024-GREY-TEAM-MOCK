@@ -6,7 +6,7 @@ __check_defined = \
 	$(if $(value $1),, \
 		$(error Undefined $1))
 
-CC = clang
+CC = gcc
 CFLAGS = -I../tinycrypt/lib/include
 LDFLAGS = -L../tinycrypt/lib -ltinycrypt
 
