@@ -431,7 +431,7 @@ MAKECMDGOALS:=$(.DEFAULT_GOAL)
 endif
 
 
-all:
+all: encryptData
 # 	Extend the functionality of the "all" recipe here
 	arm-none-eabi-size --format=berkeley $(BUILD_DIR)/$(PROJECT).elf
 

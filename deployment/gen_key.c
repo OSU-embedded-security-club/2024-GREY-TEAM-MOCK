@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "../tinycrypt/lib/include/tinycrypt/aes.h"
 #include "../tinycrypt/lib/include/tinycrypt/constants.h"
 #include "../tinycrypt/lib/include/tinycrypt/ctr_prng.h"
@@ -8,12 +10,14 @@
 
 int main(void) {
     TCCtrPrng_t ctx;
-    uint8_t entropy[TC_AES_KEY_SIZE + TC_AES_BLOCK_SIZE]; // For entropy
+    uint8_t entropy[TC_AES_KEY_SIZE + TC_AES_BLOCK_SIZE];
     uint8_t key[KEY_LENGTH];
     int result;
-    
+
+    // Seed the random number generator
+    srand((unsigned int)time(NULL));
     for (int i = 0; i < sizeof(entropy); i++) {
-        entropy[i] = (uint8_t)(i + 1);
+        entropy[i] = (uint8_t)(rand() % 256);
     }
 
     // Initialize the PRNG

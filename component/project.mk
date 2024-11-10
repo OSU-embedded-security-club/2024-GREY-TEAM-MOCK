@@ -40,3 +40,11 @@ CRYPTO_EXAMPLE=0
 
 # Enable Crypto Example
 #CRYPTO_EXAMPLE=1
+
+# Target to compile and run encryptData
+encryptData: ../deployment/encryptData.c ../deployment/crypto.c
+	@echo ${pwd}
+	@echo "Compiling encryptData..."
+	gcc ../deployment/encryptData.c ../deployment/crypto.c -I../tinycrypt/lib/include -L../tinycrypt/lib -ltinycrypt -o ../deployment/encryptData
+	@echo "Running encryptData..."
+	../deployment/encryptData
